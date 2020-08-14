@@ -1,0 +1,48 @@
+@import './constant.scss';
+@import './default.scss';
+@import './mixins.scss';
+
+* {@include vendorPrefix(box-sizing, content-box);}
+.cage {@include vendorPrefix(box-sizing, border-box);}
+.clear-left {@include clear(left);}
+.clear-right {@include clear(right);}
+.center {
+  &.vh, &.hv {@include center();};
+  &.v {@include center(v);}
+  &.h {@include center(h);}
+}
+.slash {
+  position: relative; padding-right: calc(1.5em);
+  &:after {
+    display: inline-block; content: '';
+    width: 1px; height: 0.9em; margin-right: 0.75em;
+    background-color: rgba(0,0,0,0.35);
+    @include center(v); right: 0;
+  }
+  &:last-child:after {display: none;}
+}
+.ellipsis-row {@include ellipse();}
+.ellipsis-many {@include ellipse(2);}
+
+.movies {
+  margin: 0 auto;
+  max-width: 1280px;
+  text-align: center;
+  @include large- {
+    @include justify(2, 40px);
+  }
+  @include -large {
+    @include justify(1, 0);
+    margin: 0 20px;
+  }
+  > div {
+    margin-bottom: 40px;
+  }
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

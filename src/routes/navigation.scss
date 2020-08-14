@@ -1,0 +1,18 @@
+@import './constant.scss';
+@import './default.scss';
+@import './mixins.scss';
+
+.nav {
+  position: fixed;
+  width: 8%;
+  top: 10px;
+  left: 10px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 2px 8px 22px -5px grey;
+  a {
+    display: block;
+    padding: 10px 0;
+    color: #000;
+  }
+}

@@ -1,55 +1,22 @@
 import React from 'react';
-import axios from 'axios';
-import Movie from './Movie';
-import './App.css';
+import { HashRouter, Route } from 'react-router-dom';
+// github pages에 업로드 하는 것이 아닌 경우에는
+// HashRouter대신에 BrowserRouter를 사용해보자.
+// BrowserRouter는 githun pages에 업로드 하기 번거로운 부분들이 많음
+import Home from './routes/Home';
+import About from './routes/About';
+import Detail from './routes/Detail';
+import Navigation from './routes/Navigation';
 
-class App extends React.Component {
-  state = {
-    isLoading: true,
-    movies: []
-  };
-
-  getMovies = async () => {
-    const {
-      data: { 
-        data: {movies}
-      }
-    } = await axios.get('https://yts-proxy.now.sh/list_movies.json?sort_by=rating');
-    this.setState({ movies, isLoading: false })
-  }
-
-  componentDidMount() {
-    this.getMovies();
-    // setTimeout(() => {
-    //   this.setState({ isLoading: false });
-    // }, 6000); 
-    // setTimeout 작동하는지 확인
-  }
-  render(){
-    const { isLoading, movies } = this.state; // es6
-    return (
-      <section className="container">
-        {isLoading ? (
-          <div className="loader">
-            <span className="load__text">Loading...</span>
-          </div>
-          ) : (
-            <ul className="movies">
-              {movies.map(movie => (
-                <Movie 
-                  key={movie.id}
-                  id={movie.id} 
-                  year={movie.year}
-                  title={movie.title} 
-                  summary={movie.summary} 
-                  poster={movie.medium_cover_image} 
-                />
-              ))}
-            </ul>
-          )}
-      </section>
-    )
-  }
+function App() {
+  return (
+    <HashRouter>
+      <Navigation />
+      <Route path="/" exact={true} component={Home} />
+      <Route path="/about" component={About} />
+      <Route path="/movie/:id" component={Detail} />
+    </HashRouter>
+  )
 }
 
 export default App;
